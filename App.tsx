@@ -550,9 +550,9 @@ const App: React.FC = () => {
                         color: item.color,
                         textAlign: item.textAlign,
                         whiteSpace: 'pre-wrap',
-                        lineHeight: 1.2,
-                        width: 'max-content',
-                        maxWidth: '100%'
+                      lineHeight: 1.2,
+                      maxWidth: `${Math.max(5, canvasSize.width - item.x / MM_TO_PX)}mm`,
+                      wordBreak: 'break-word'
                     }}>
                         {item.content}
                     </div>

@@ -63,6 +63,9 @@ export const Canvas: React.FC<CanvasProps> = ({
 
   const widthPx = size.width * MM_TO_PX;
   const heightPx = size.height * MM_TO_PX;
+  const getTextMaxWidth = useCallback((item: CanvasItem) => {
+    return Math.max(20, widthPx - item.x);
+  }, [widthPx]);
 
   const finishEditing = useCallback(() => {
     if (!editingItemId) return;
@@ -468,7 +471,9 @@ export const Canvas: React.FC<CanvasProps> = ({
                       fontStyle: item.fontStyle || 'normal',
                       color: item.color || '#000',
                       textAlign: item.textAlign || 'left',
-                      lineHeight: 1.2
+                      lineHeight: 1.2,
+                      maxWidth: getTextMaxWidth(item),
+                      wordBreak: 'break-word'
                     }}
                   />
                 ) : (
@@ -483,7 +488,9 @@ export const Canvas: React.FC<CanvasProps> = ({
                       textAlign: item.textAlign || 'left',
                       whiteSpace: 'pre-wrap',
                       minWidth: '20px',
-                      lineHeight: 1.2
+                      lineHeight: 1.2,
+                      maxWidth: getTextMaxWidth(item),
+                      wordBreak: 'break-word'
                     }}
                   >
                     {item.content}
